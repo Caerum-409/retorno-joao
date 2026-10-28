@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #080808;
+            background-color: #030303;
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -21,13 +21,75 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Camada 1: Alerta Vermelho de Emergência com Brilho Intenso nas Bordas */
+        .prison-alarm-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, transparent 30%, rgba(255, 0, 85, 0.45) 100%);
+            z-index: 1;
+            pointer-events: none;
+            animation: alarmPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        /* Camada 2: Grades de Prisão Neon Ciano */
+        .prison-bars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.22) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(0, 243, 255, 0.22) 2px, transparent 2px);
+            background-size: 50px 50px;
+            background-position: center;
+            z-index: 2;
+            pointer-events: none;
+            animation: neonGlow 4s infinite alternate ease-in-out;
+        }
+
+        /* Camada 3: Contêiner para os Gatinhos Aleatórios do Fundo */
+        .meme-wallpaper-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .random-meme {
+            position: absolute;
+            opacity: 0.25; /* Opacidade sutil para ficar de fundo */
+            filter: contrast(110%);
+            object-fit: contain;
+        }
+
+        @keyframes alarmPulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; filter: drop-shadow(0 0 15px rgba(255, 0, 85, 0.4)); }
+        }
+
+        @keyframes neonGlow {
+            0% { filter: drop-shadow(0 0 2px rgba(0, 243, 255, 0.4)); opacity: 0.8; }
+            100% { filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.9)); opacity: 1; }
         }
 
         .container {
             text-align: center;
             max-width: 800px;
             width: 100%;
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
@@ -82,10 +144,12 @@
         .despair-container {
             max-width: 500px;
             margin: 0 auto 40px auto;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.95);
             padding: 15px;
             border-radius: 10px;
             border: 1px solid #333;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         }
 
         .despair-label {
@@ -110,65 +174,67 @@
 
         .despair-bar-fill {
             height: 100%;
-            width: 0%;
+            width: 73%;
             background: linear-gradient(90deg, #ffaa00, #ff0055);
             box-shadow: 0 0 15px #ff0055;
-            transition: width 0.4s ease;
         }
 
-        /* Contador */
+        /* Bloco Central de Dias Expandido */
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
             margin-bottom: 40px;
         }
 
         .countdown-box {
-            background: rgba(0, 243, 255, 0.02);
-            border: 2px solid #00f3ff;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.1), inset 0 0 10px rgba(0, 243, 255, 0.05);
-            border-radius: 12px;
-            padding: 15px;
-            min-width: 140px;
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid #00f3ff;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.15);
+            border-radius: 20px;
+            padding: 40px 60px;
+            max-width: 450px;
+            width: 100%;
+            backdrop-filter: blur(10px);
         }
 
         .number {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 7rem;
+            font-weight: 900;
             color: #fff;
-            text-shadow: 0 0 10px #00f3ff;
+            text-shadow: 0 0 20px #00f3ff, 0 0 40px rgba(0, 243, 255, 0.6);
             line-height: 1;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
         }
 
         .label {
-            font-size: 0.8rem;
+            font-size: 1.5rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 4px;
             color: #00f3ff;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
         .sub-label {
-            font-size: 0.65rem;
+            font-size: 1rem;
             color: #ff007f;
-            text-shadow: 0 0 2px #ff007f;
+            text-shadow: 0 0 4px #ff007f;
             display: block;
-            margin-top: 2px;
             font-style: italic;
+            font-weight: 500;
         }
 
-        /* Quadro de Avisos / Pop-ups Dinâmicos */
+        /* Quadro de Avisos */
         .popup-box {
-            background: rgba(255, 0, 85, 0.05);
+            background: rgba(0, 0, 0, 0.95);
             border: 1px dashed #ff0055;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.1);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.25);
             border-radius: 8px;
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            backdrop-filter: blur(10px);
         }
 
         .popup-title {
@@ -188,17 +254,25 @@
 
         @media (max-width: 600px) {
             h1 { font-size: 1.6rem; }
-            .countdown-box { min-width: 110px; padding: 10px; }
-            .number { font-size: 2rem; }
+            .countdown-box { padding: 25px 35px; max-width: 300px; }
+            .number { font-size: 4.5rem; }
+            .label { font-size: 1.1rem; }
+            .sub-label { font-size: 0.85rem; }
             .profile-pic, .profile-placeholder { width: 130px; height: 130px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="prison-alarm-bg"></div>
+    <div class="prison-bars-bg"></div>
+    
+    <!-- Contêiner do papel de parede de memes -->
+    <div class="meme-wallpaper-container" id="wallpaper-box"></div>
+
     <div class="container">
         <h1>Operação: O Sonho Acabou</h1>
-        <div class="subtitle">Contagem regressiva para o fim da mamicidade</div>
+        <div class="subtitle">Contagem regressiva para o fim da vagabundagem</div>
         
         <div class="profile-area">
             <img src="foto.jpg" alt="Foto do Sobrevivente" class="profile-pic" onerror="this.style.display='none'; document.getElementById('placeholder').style.display='flex'">
@@ -210,80 +284,36 @@
         <!-- Medidor de Desespero -->
         <div class="despair-container">
             <div class="despair-label">
-                <span>Nível de Desespero Pré-Retorno</span>
-                <span id="despair-percentage">0%</span>
+                <span>Nível de Desespero </span>
+                <span id="despair-percentage">73%</span>
             </div>
             <div class="despair-bar-bg">
                 <div class="despair-bar-fill" id="despair-fill"></div>
             </div>
         </div>
 
-        <!-- Contador Modificado -->
+        <!-- Painel de Contagem -->
         <div class="countdown-container">
             <div class="countdown-box">
-                <div class="number" id="days">00</div>
-                <div class="label">Dias</div>
+                <div class="number" id="days">04</div>
+                <div class="label">Dias Restantes</div>
                 <div class="sub-label">de puro desespero</div>
-            </div>
-            <div class="countdown-box">
-                <div class="number" id="hours">00</div>
-                <div class="label">Horas</div>
-                <div class="sub-label">de sono acumulado</div>
-            </div>
-            <div class="countdown-box">
-                <div class="number" id="minutes">00</div>
-                <div class="label">Minutos</div>
-                <div class="sub-label">para chorar no banho</div>
-            </div>
-            <div class="countdown-box">
-                <div class="number" id="seconds">00</div>
-                <div class="label">Segundos</div>
-                <div class="sub-label">de liberdade</div>
             </div>
         </div>
 
         <!-- Quadro de Avisos -->
         <div class="popup-box">
-            <div class="popup-title">⚠️ Alerta do Sistema de RH ⚠️</div>
+            <div class="popup-title">⚠️ Alerta do Sistema Suporte ⚠️</div>
             <div class="popup-text" id="dynamic-message">
-                Conectando à rede da firma...
+                Maquina do amigo sendo desmontada 3...2...1.
             </div>
         </div>
     </div>
 
     <script>
-        // Garante a execução apenas quando a árvore DOM estiver totalmente montada
         window.addEventListener('DOMContentLoaded', () => {
-            // Definição exata do período de férias (Ano, Mês - 1, Dia)
-            const startDate = new Date(2026, 9, 14, 0, 0, 0).getTime();
-            const targetDate = new Date(2026, 10, 2, 0, 0, 0).getTime();
-            const totalDuration = targetDate - startDate;
+            const targetDate = new Date(2026, 10, 2, 0, 0, 0); // 02 de Novembro de 2026
+            const startDate = new Date(2026, 9, 14, 0, 0, 0); // 14 de Outubro de 2026
+            const totalDuration = targetDate.getTime() - startDate.getTime();
 
-            const popUpMessages = [
-                "Atenção: A sua caneca favorita no armário do setor já foi usada por 3 pessoas diferentes.",
-                "O estoque de café da firma caiu 40% desde a sua saída. Venha repor urgentemente.",
-                "Você já começou a praticar o seu 'Bom dia, equipe!' sorrindo falsamente no espelho?",
-                "Seu crachá está na gaveta pegando poeira. Ele sente sua falta. O relógio de ponto também.",
-                "Atenção: Três novas planilhas complexas foram criadas e batizadas com o seu nome.",
-                "Dica do dia: Comece a redecorar sua mente para aceitar que o despertador vai tocar às 06h.",
-                "O TI avisou que sua senha do Windows expira em breve. Boa sorte tentando lembrar.",
-                "Lembramos que a frase 'Conforme meu e-mail anterior' deve ser usada com moderação no retorno."
-            ];
-
-            function updateCountdown() {
-                const now = new Date().getTime();
-                const difference = targetDate - now;
-
-                // Fluxo de interrupção se o prazo expirar
-                if (difference <= 0) {
-                    const countdownElement = document.querySelector('.countdown-container');
-                    const despairElement = document.querySelector('.despair-container');
-                    if(countdownElement) countdownElement.style.display = 'none';
-                    if(despairElement) despairElement.style.display = 'none';
-                    
-                    document.getElementById('dynamic-message').innerHTML = "<span style='color: #00f3ff; text-shadow: 0 0 10px #00f3ff; font-size: 1.5rem; font-weight: bold;'>BATEU O PONTO! ⏰<br>As férias acabaram. Favor abrir o Teams e limpar a caixa de entrada.</span>";
-                    clearInterval(countdownInterval);
-                    return;
-                }
-
-                // Desmembramento preciso do tempo restante
+            // Aponta diretamente para o arquivo local 'gato.png' que você salvou na mesma pasta
